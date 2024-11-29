@@ -60,8 +60,6 @@
   <body>
     <div class="card_box">
       <h1>Stripe Payment Gateway</h1>
-      <!-- <label for="card-element">Credit or Debit</label>
-      <div id="card-element" class="card_input"></div> -->
       <label for="card-number-element">Card Number</label>
       <div id="card-number-element" class="card_input"></div>
 
@@ -167,7 +165,7 @@
         if (error) {
           cardResult.textContent = error.message;
         } else {
-          const apiUrl = "/api/payment";
+          const apiUrl = window.location.origin + "/api/payment";
           const response = await fetch(apiUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
