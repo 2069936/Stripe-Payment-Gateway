@@ -1,4 +1,3 @@
-alert("halo");
 const stripe = Stripe(
   "pk_test_51QPLd8CNuaCYaEC1WYc83vIXoPDWRiXKxPXgne970WzLB32i1cSM01gNiSrkYsrqLakKg8una9P8DJ6IgrCn6PMv00B6UiK5tw"
 );
