@@ -46,8 +46,9 @@ app.post('/save-card', async (req, res) => {
 
 app.post('/payment', async (req, res) => {
     try {
+        const amount = req.body.amount; 
         const paymentIntent = await stripe.paymentIntents.create({
-            amount: 499 * 100,
+            amount: amount * 100,
             currency: 'usd',
             payment_method_types: ['card'],
             payment_method: req.body.paymentMethodId,

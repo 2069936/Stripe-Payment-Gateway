@@ -87,6 +87,7 @@ cardCvcElement.mount("#card-cvc-element");
 
 const cardButton = document.getElementById("card-button");
 const cardResult = document.getElementById("card-result");
+const cardTotal = document.getElementById('card-total').textContent;
 
 cardButton.addEventListener("click", async () => {
   cardResult.textContent = "Loading...";
@@ -97,10 +98,10 @@ cardButton.addEventListener("click", async () => {
   if (error) {
     cardResult.textContent = error.message;
   } else {
-    const apiUrl =
-      window.location.hostname === "localhost"
-        ? "http://localhost:3000/api/payment"
-        : "https://stripe-payment-gateway-beta.vercel.app/api/payment";
+    const apiUrl = "/payment";
+    //   window.location.hostname === "localhost"
+    //     ? "http://localhost:3000/api/payment"
+    //     : "https://stripe-payment-gateway-beta.vercel.app/api/payment";
     const response = await fetch(
         apiUrl,
       {
@@ -108,6 +109,7 @@ cardButton.addEventListener("click", async () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           paymentMethodId: paymentMethod.id,
+          amount: cardTotal,
         }),
       }
     );
