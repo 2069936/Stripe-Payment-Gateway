@@ -11,24 +11,6 @@ const elements = stripe.elements({
   ],
 });
 
-// const cardElement = elements.create('card',{
-//     stye:{
-//         base: {
-//             color: '#fff',
-//             fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-//             fontSmoothing: 'antialiased',
-//             fontSize: '16px',
-//             '::placeholder': {
-//                 color: '#aab7c4'
-//             }
-//         },
-//         invalid: {
-//             color: '#fa755a',
-//             iconColor: '#fa755a'
-//         }
-//     }
-// });
-// cardElement.mount('#card-element');
 const cardNumberElement = elements.create("cardNumber", {
   stye: {
     base: {
