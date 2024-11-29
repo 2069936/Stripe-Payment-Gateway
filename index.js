@@ -5,9 +5,10 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const app = express();
 app.use(express.json());
 
-// You no longer need to serve static files in serverless functions
-// Vercel will automatically serve files from the public directory
-app.use(express.static('public')); // Serve the public directory (index.html included)
+
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+});
 
 // API routes for handling payments
 app.post('/save-card', async (req, res) => {
