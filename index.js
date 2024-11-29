@@ -1,67 +1,57 @@
-require('dotenv').config()
-const express = require('express')
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const cors = require('cors');
 
-const app = express()
-app.use(express.json())
+// CORS settings
+const corsOptions = {
+  origin: ["https://waaxx.webflow.io", "http://localhost:3000"],
+  optionsSuccessStatus: 200,
+};
 
-app.use(express.static('public'))
+module.exports = async (req, res) => {
+  // Apply CORS
+  cors(corsOptions)(req, res, () => {});
 
-app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: __dirname})
-})
+  if (req.method === 'GET') {
+    res.sendFile('index.html', { root: __dirname });  // Serve static HTML page
+  }
 
-app.post('/save-card', async (req, res) => {
+  if (req.method === 'POST' && req.url === '/save-card') {
     try {
-       //CREATE customer
-       const customer = await stripe.customers.create({
-        name:'Gwen Stacy',
-        email:'gwenstacy101@gmail.com',
+      // CREATE customer
+      const customer = await stripe.customers.create({
+        name: 'Gwen Stacy',
+        email: 'gwenstacy101@gmail.com',
         payment_method: req.body.paymentMethodId,
         invoice_settings: {
-            default_payment_method: req.body.paymentMethodId
+          default_payment_method: req.body.paymentMethodId
         }
-       })
-       console.log(customer);
-       //END create customer
+      });
 
-       //IF Customer already Exist
-       /*
-       await stripe.paymentMethods.attach(
-           req.body.paymentMethodId, {customer: 'cus_RIehVLIHs4FcwM'}
-       )
-       await stripe.customers.update('cus_RIehVLIHs4FcwM', {
-           invoice_settings: {
-               default_payment_method: req.body.paymentMethodId
-           }
-       })
-       */
-       //END If Customer already Exist
+      console.log(customer);
 
-       res.status(201).json({message: 'Card saved successfully'});
+      res.status(201).json({ message: 'Card saved successfully' });
     } catch (error) {
-        res.status(500).json({message: error.message})
+      res.status(500).json({ message: error.message });
     }
-})
+  }
 
-app.post('/payment', async (req, res) => {
+  if (req.method === 'POST' && req.url === '/payment') {
     try {
-        const amount = req.body.amount; 
-        const paymentIntent = await stripe.paymentIntents.create({
-            amount: amount * 100,
-            currency: 'usd',
-            payment_method_types: ['card'],
-            payment_method: req.body.paymentMethodId,
-            confirm: true,
-            error_on_requires_action: true
-        })
-        res.json({message: 'Payment successful'})
-        console.log(paymentIntent);
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
+      const amount = req.body.amount;
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount * 100,
+        currency: 'usd',
+        payment_method_types: ['card'],
+        payment_method: req.body.paymentMethodId,
+        confirm: true,
+        error_on_requires_action: true
+      });
 
-app.listen(3000, () => {
-    console.log('Server is running on port 3000')
-})
+      res.json({ message: 'Payment successful' });
+      console.log(paymentIntent);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+};
