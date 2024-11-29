@@ -98,7 +98,7 @@ cardButton.addEventListener("click", async () => {
   if (error) {
     cardResult.textContent = error.message;
   } else {
-    const apiUrl = "/payment";
+    const apiUrl = "/api/payment";
     //   window.location.hostname === "localhost"
     //     ? "http://localhost:3000/api/payment"
     //     : "https://stripe-payment-gateway-beta.vercel.app/api/payment";
