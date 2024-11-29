@@ -13,11 +13,6 @@ module.exports = async (req, res) => {
   // Apply CORS
   cors(corsOptions)(req, res, () => {});
 
-  if (req.method === 'GET') {
-    // Serve the static index.html file
-    res.sendFile(path.join(__dirname, '../public/index.html'));
-  }
-
   if (req.method === 'POST' && req.url === '/save-card') {
     try {
       // CREATE customer
