@@ -167,10 +167,7 @@
         if (error) {
           cardResult.textContent = error.message;
         } else {
-          const apiUrl = "/api/payment";
-          //   window.location.hostname === "localhost"
-          //     ? "http://localhost:3000/api/payment"
-          //     : "https://stripe-payment-gateway-beta.vercel.app/api/payment";
+          const apiUrl = "/payment";
           const response = await fetch(apiUrl, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
