@@ -1,0 +1,8 @@
+.vercel
+node_modules/
+!node_modules/express/
+!node_modules/stripe/
+!node_modules/nodemon/
+
+.env
+.DS_Store

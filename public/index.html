@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stripe Payment Gateway</title>
+    <style type="text/css" href="styles.css"></style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        padding-top: 60px;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .card_box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 40%;
+        height: auto;
+        gap: 20px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      .card_input {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0 10px;
+        height: 40px;
+        padding-top: 10px;
+        box-sizing: border-box;
+      }
+
+      #card-button {
+        margin-top: 20px;
+        padding: 10px 32px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+      }
+
+      #card-button:hover {
+        background-color: #45a049;
+        transform: scale(0.95);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card_box">
+      <h1>Stripe Payment Gateway</h1>
+      <!-- <label for="card-element">Credit or Debit</label>
+      <div id="card-element" class="card_input"></div> -->
+      <label for="card-number-element">Card Number</label>
+      <div id="card-number-element" class="card_input"></div>
+
+      <label for="card-expiry-element">Expiry Date</label>
+      <div id="card-expiry-element" class="card_input"></div>
+
+      <label for="card-cvc-element">CVC</label>
+      <div id="card-cvc-element" class="card_input"></div>
+
+      <!-- button -->
+      <button id="card-button">Pay $499</button>
+
+      <!-- alert -->
+      <div id="card-result"></div>
+    </div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="scripts.js"></script>
+  </body>
+</html>
